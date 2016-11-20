@@ -1,15 +1,43 @@
 # -*- coding: utf-8 -*-
 
 import simplekml
+import math
+
+TRUE = 1
+FALSE = 0
 
 '''
-Read a lat long file whose path is provided as an argument and
-return a list of the lat-long
+\fn ReadLatLongFile(pathOfFile)
+
+\details Read the file whose full path is provided as argument to the function
+and return the list of all the lines raed.
+If latitude and longitude are in radians then the second argument of the 
+function - angle_in_rads is set to TRUE else it is set to FALSE 
+
+\param [in] pathOfFile Full path of file from where to read the latitude and longitude
+                       values
+                       
+\param [in] angle_in_rads set to TRUE if latitude and longitude are in radians else 
+                          set to FALSE
+                       
+\returns List of latitude, longitude strings
 '''
 
-def ReadLatLongFile(pathOfFile):
+def ReadLatLongFile(pathOfFile, angle_in_rads):
+    ListOfLatLongs = []
     with open(pathOfFile,'r') as LatLongFileObj:
-        ListOfLatLongs = LatLongFileObj.readlines()
+        for line in LatLongFileObj:
+            lat, long = line.split(",")
+            latitudeFloat = float(lat)
+            longitudeFloat = float(long)
+            if (TRUE == angle_in_rads):
+                assert(((math.pi/2) > latitudeFloat) and (-(math.pi/2) < latitudeFloat))
+                assert((math.pi > longitudeFloat) and (-(math.pi) < longitudeFloat))
+            else:
+                assert((90 > latitudeFloat) and (-90 < latitudeFloat))
+                assert ((180 > longitudeFloat) and (-180 < longitudeFloat))
+            
+            ListOfLatLongs.append(line)
     return ListOfLatLongs
 
 '''
@@ -37,9 +65,9 @@ def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings):
     
 
 if __name__ == "__main__":
-    pathOfFile = '/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/LatLongFiles/LatLongFile1.txt'
+    pathOfFile = '/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/LatLongFiles/LatLongFileInDegrees.txt'
     LatLongKML = simplekml.Kml()    
-    ListOfLatLongs = ReadLatLongFile(pathOfFile)
+    ListOfLatLongs = ReadLatLongFile(pathOfFile, 0)
     CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongs)
     LatLongKML.save("/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/Points.kml")
 
