@@ -1,16 +1,29 @@
 # -*- coding: utf-8 -*-
 
+import simplekml
+
 '''
 Read a lat long file whose path is provided as an argument and
 return a list of the lat-long
 '''
-import simplekml
 
 def ReadLatLongFile(pathOfFile):
     with open(pathOfFile,'r') as LatLongFileObj:
         ListOfLatLongs = LatLongFileObj.readlines()
     return ListOfLatLongs
-    
+
+'''
+\fn CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings)
+
+\brief Add all the points (Latitude and longitude pair) listed in argument
+'ListOfLatLongStrings' to the simplekml object provided as first argument to
+the function
+
+\param [in] ListOfLatLongStrings List of latitude and longitude strings
+\param [out] LatLongKML simplekml object to which latitude and longitude values from
+                        'ListOfLatLongStrings' will be added to
+\returns None
+'''    
 def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings):
     LengthOfListofLatLongStrings = len(ListOfLatLongStrings)
     for i in range(LengthOfListofLatLongStrings):
