@@ -24,10 +24,10 @@ def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings):
     
 
 if __name__ == "__main__":
-    pathOfFile = '/home/kapil/SpyderWorkspace/ExperimentsOnSimpleKML/LatLongFiles/LatLongFile1.txt'
+    pathOfFile = '/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/LatLongFiles/LatLongFile1.txt'
     LatLongKML = simplekml.Kml()    
     ListOfLatLongs = ReadLatLongFile(pathOfFile)
     CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongs)
-    LatLongKML.save("/home/kapil/SpyderWorkspace/ExperimentsOnSimpleKML/Points.kml")
+    LatLongKML.save("/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/Points.kml")
 
     
