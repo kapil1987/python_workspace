@@ -59,9 +59,9 @@ def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings):
         kml_point = LatLongKML.newpoint(name = "", coords = [(long, lat)])
         kml_point.style.labelstyle.color = simplekml.Color.red  # Make the text red
         kml_point.style.labelstyle.scale = 2  # Make the text twice as big
-        kml_point.style.iconstyle.scale=10
-        kml_point.style.iconstyle.color="red"
-        kml_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        kml_point.style.iconstyle.scale = 5
+        kml_point.style.iconstyle.color = "red"
+   #     kml_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
     
 
 if __name__ == "__main__":
