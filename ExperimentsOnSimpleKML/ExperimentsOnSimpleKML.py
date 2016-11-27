@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import simplekml
 import math
 
@@ -63,12 +64,23 @@ def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings):
         kml_point.style.iconstyle.color = "red"
    #     kml_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
     
+def usage(ProgName):
+    print("usage: \n\t")
+    print(ProgName, "<Full path of the lat-long file to read> <Full path(with name) of the output KML file to save>")
+    print("\n")
+    sys.exit(1)
 
 if __name__ == "__main__":
-    pathOfFile = '/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/LatLongFiles/LatLongFileInDegrees.txt'
+    if (3 != len(sys.argv)) :
+        usage(sys.argv[0])
+        
+    inputLatLongFile = sys.argv[1]
+    outputKMLFile = sys.argv[2]
+    
     LatLongKML = simplekml.Kml()    
-    ListOfLatLongs = ReadLatLongFile(pathOfFile, 0)
+    ListOfLatLongs = ReadLatLongFile(inputLatLongFile, 0)
+    
     CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongs)
-    LatLongKML.save("/home/kapil/workspace/python_workspace/ExperimentsOnSimpleKML/Points.kml")
+    LatLongKML.save(outputKMLFile)
 
     
