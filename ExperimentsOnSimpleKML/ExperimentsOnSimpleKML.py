@@ -53,16 +53,22 @@ the function
                         'ListOfLatLongStrings' will be added to
 \returns None
 '''    
-def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings):
+def CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongStrings, angle_in_rads):
     LengthOfListofLatLongStrings = len(ListOfLatLongStrings)
     for i in range(LengthOfListofLatLongStrings):
         lat,long = ListOfLatLongStrings[i].split(",")
+        lat = float(lat)
+        long = float(long)
+        if (angle_in_rads):
+            lat = lat * 180/math.pi
+            long = long * 180/math.pi
+
         kml_point = LatLongKML.newpoint(name = "", coords = [(long, lat)])
         kml_point.style.labelstyle.color = simplekml.Color.red  # Make the text red
         kml_point.style.labelstyle.scale = 2  # Make the text twice as big
-        kml_point.style.iconstyle.scale = 5
+        kml_point.style.iconstyle.scale = 3
         kml_point.style.iconstyle.color = "red"
-   #     kml_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
+        kml_point.style.iconstyle.icon.href = 'http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png'
     
 def usage(ProgName):
     print("usage: \n\t")
@@ -78,9 +84,9 @@ if __name__ == "__main__":
     outputKMLFile = sys.argv[2]
     
     LatLongKML = simplekml.Kml()    
-    ListOfLatLongs = ReadLatLongFile(inputLatLongFile, 0)
+    ListOfLatLongs = ReadLatLongFile(inputLatLongFile, 1)
     
-    CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongs)
+    CreateKMLFromListOfLatLongStrings(LatLongKML, ListOfLatLongs, TRUE)
     LatLongKML.save(outputKMLFile)
 
     
