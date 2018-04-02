@@ -2,6 +2,18 @@ import numpy as np
 from numpy import dtype
 
 
+
+def fnNumpy2DArrayTraversal():
+    numpy2DArray = np.array([[1,2, 3], [4,5,6]])
+    rows = numpy2DArray.shape[0]
+    cols = numpy2DArray.shape[1]
+    print("rows - ", rows, "cols - ", cols)
+    
+    for row in range(rows):
+        for col in range(cols):
+            print("element [{row}, {col}] is {element}".format(row = row, col=col, element=numpy2DArray[row, col]))
+    return
+    
 def fnExpOnNumpyArray():
     ''' Numpy array (1 dimensional) '''
     NumpyArray = np.array([1,2,3])
@@ -72,3 +84,6 @@ def fnExpOnNumpy_ND_Array():
 if __name__=="__main__":
     fnExpOnNumpyArray()
     fnExpOnNumpy_ND_Array()
+    fnNumpy2DArrayTraversal()
+    
+    
