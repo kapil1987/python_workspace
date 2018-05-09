@@ -5,6 +5,7 @@ from sklearn import linear_model
 
 from mpl_toolkits.mplot3d import axes3d
 from sklearn.metrics.regression import mean_squared_error
+from code import interact
 
 
 
@@ -15,9 +16,13 @@ from sklearn.metrics.regression import mean_squared_error
 
    1. Find out prediction with train data itself
    2. Scatter plot of train_data vs target
-   3. Plot of train_data vs prediction '''
+   3. Plot of train_data vs prediction 
    
-def fnLinearRegression(TrainData, Target):
+   \returns mean squared error between target and prediction. Regression coefficients
+            and intercept
+   '''
+   
+def fnLinearRegression(TrainData, Target, Title):
     
     regr = linear_model.LinearRegression()
     regr.fit(TrainData, Target)
@@ -26,16 +31,20 @@ def fnLinearRegression(TrainData, Target):
     
     plt.figure(1)
     
+    plt.title(Title)
     plt.scatter(TrainData, Target)
     plt.plot(TrainData, prediction, color = 'blue')
     
     plt.show()
     
-    ''' Find out mean squared error between prediction and target '''
+    ''' Find out mean sqs uared error between prediction and target '''
     
     MSE = mean_squared_error(Target, prediction)
     
-    return MSE
+    print(type(regr.coef_))
+    print(type(regr.intercept_))
+    
+    return MSE, regr.coef_, regr.intercept_
 
 ''' Get only 2 points in 2d space (0, 0) and (1, 1))
     Equation of line passing thru these 2 points is
