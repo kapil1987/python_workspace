@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 from sklearn import linear_model
+from sklearn.metrics import r2_score
 
 from mpl_toolkits.mplot3d import axes3d
 from sklearn.metrics.regression import mean_squared_error
@@ -19,7 +20,7 @@ from code import interact
    3. Plot of train_data vs prediction 
    
    \returns mean squared error between target and prediction. Regression coefficients
-            and intercept
+            ,intercept and r2 score
    '''
    
 def fnLinearRegression(TrainData, Target, Title):
@@ -41,10 +42,9 @@ def fnLinearRegression(TrainData, Target, Title):
     
     MSE = mean_squared_error(Target, prediction)
     
-    print(type(regr.coef_))
-    print(type(regr.intercept_))
+    R2_Score = r2_score(Target, prediction)
     
-    return MSE, regr.coef_, regr.intercept_
+    return MSE, regr.coef_, regr.intercept_, R2_Score 
 
 ''' Get only 2 points in 2d space (0, 0) and (1, 1))
     Equation of line passing thru these 2 points is
