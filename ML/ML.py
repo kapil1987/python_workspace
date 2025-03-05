@@ -22,6 +22,8 @@ def normal_equation():
 def gradient_descent(X, Y, m, n):
   """
   Implement gradient descent algo
+  The purpose of gradient-descent if fit a linear curve to the input
+  values. This curve can then be used to predict the future values
   
   Parameters
   ----------
@@ -40,7 +42,14 @@ def gradient_descent(X, Y, m, n):
   theta = np.random.randn(n+1,1)
 
   for iteration in range(iterations):
+    # gradient vector - Represents the magnitude and direction of the steepest 
+    # increase in the cost function.
+    # cost function - RMSE(x, y)
     gradiants = (2/m)*X_b.T.dot(X_b.dot(theta) - Y)
+
+    # gradient descent algorithm finds out the minima for the cost function
+    # by taking tiny steps towards the minima. The magnitude of these steps
+    # are controlled by the parameter learning_rate
     theta = theta - (learning_rate*gradiants)
 
   return theta
