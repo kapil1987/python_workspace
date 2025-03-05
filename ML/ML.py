@@ -19,18 +19,35 @@ def normal_equation():
   plt.plot(X,y,"b.")
   plt.show()
 
-def gradient_descent():
-  X,y = generate_data()
-  X_b = np.c_[np.ones((100,1)), X]
+def gradient_descent(X, Y, m, n):
+  """
+  Implement gradient descent algo
+  
+  Parameters
+  ----------
+  X - numpy 2d array of size mxn. one row is one sample and one column is one feature
+  Y - mx1 array of target values
+  m - Number of rows in X. Each row represents a sample
+  n - number of columns in X. Each column represents a feature
+
+  Returns
+  -------
+  (n+1)x1 vector of theta
+  """
+  X_b = np.c_[np.ones((m,1)), X]
   learning_rate = 0.1
   iterations = 1000
-  theta = np.random.randn(2,1)
-  m = 100
+  theta = np.random.randn(n+1,1)
 
   for iteration in range(iterations):
-    gradiants = (2/m)*X_b.T.dot(X_b.dot(theta) - y)
+    gradiants = (2/m)*X_b.T.dot(X_b.dot(theta) - Y)
     theta = theta - (learning_rate*gradiants)
 
+  return theta
+
+def test_gradient_descent():
+  X,y = generate_data()
+  theta = gradient_descent(X,y,100,1)
   X_new = np.array([[0], [2]])
   X_b_new = np.c_[np.ones((2,1)), X_new]
   y_predict = X_b_new.dot(theta)
@@ -66,11 +83,9 @@ def stochastic_gradient_descent():
   plt.show()
 
 
-
-  
-
 if __name__ == "__main__":
  # normal_equation()
-  stochastic_gradient_descent()
+ #  stochastic_gradient_descent()
+ test_gradient_descent()
 
 
